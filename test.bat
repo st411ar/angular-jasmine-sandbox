@@ -1,1 +1,1 @@
-start cmd /k ng test
+start cmd /k npm test
