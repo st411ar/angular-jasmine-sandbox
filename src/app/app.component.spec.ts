@@ -205,3 +205,18 @@ describe('Included matchers:', function() {
     expect(foo).toThrowError(TypeError, "foo bar baz");
   });
 });
+
+
+describe('A spec using the fail function', function() {
+  var foo = function(x, callback) {
+    if (x) {
+      callback();
+    }
+  };
+
+  it('should not call the callback', function() {
+    foo(false, function() {
+      fail("Callback has been called");
+    });
+  });
+});
