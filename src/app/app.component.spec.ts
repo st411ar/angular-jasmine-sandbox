@@ -651,4 +651,20 @@ describe('A spy', function() {
     expect(firstCallContext.args).toEqual([123]);
     expect(firstCallContext.returnValue).toBeUndefined;
   });
+
+  it('tracks the context', function() {
+    var spy = jasmine.createSpy('spy');
+    var baz = {
+      fn: spy
+    };
+    var quux = {
+      fn: spy
+    };
+
+    baz.fn(123);
+    quux.fn(456);
+
+    expect(spy.calls.first().object).toBe(baz);
+    expect(spy.calls.mostRecent().object).toBe(quux);
+  });
 });
