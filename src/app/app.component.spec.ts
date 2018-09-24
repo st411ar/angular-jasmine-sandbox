@@ -981,4 +981,24 @@ describe('Asynchronous specs', function() {
       done();
     }, 1000);
   });
+
+  describe('A spec using done.fail', function() {
+    var foo = function(x, callBack1, callBack2) {
+      if (x) {
+        setTimeout(callBack1, 0);
+      } else {
+        setTimeout(callBack2, 0);
+      }
+    };
+
+    it('should not call the second callback', function(done) {
+      foo(
+        true,
+        done,
+        function() {
+          done.fail('Second callback has been called');
+        }
+      );
+    });
+  });
 });
