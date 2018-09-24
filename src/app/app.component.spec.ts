@@ -691,4 +691,8 @@ describe('A spy, when created manually', function() {
   it('is named, which helps in error reporting', function() {
     expect(whatAmI.and.identity()).toEqual('whatAmI');
   });
+
+  it('tracks that the spy was called', function() {
+    expect(whatAmI).toHaveBeenCalled();
+  });
 });
