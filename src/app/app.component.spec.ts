@@ -703,4 +703,8 @@ describe('A spy, when created manually', function() {
   it('tracks all the arguments of its calls', function() {
     expect(whatAmI).toHaveBeenCalledWith('I', 'am', 'a', 'spy');
   });
+
+  it('allows access to the most recent call', function() {
+    expect(whatAmI.calls.mostRecent().args[0]).toEqual('I');
+  });
 });
