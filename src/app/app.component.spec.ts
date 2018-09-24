@@ -839,3 +839,33 @@ describe('jasmine.arrayContaining', function() {
     });
   });
 });
+
+describe('jasmine.stringMatching', function() {
+
+  // example has been refactored due to typescript restrictions
+  it('matches as a regexp', function() {
+
+    // doesn't work due to typescript restrictions
+    // expect({foo: 'bar'}).toEqual({foo: jasmine.stringMatching(/^bar$/)});
+    let obj1: any = { foo: 'bar' };
+    expect(obj1.foo).toEqual(jasmine.stringMatching(/^bar$/));
+    expect(obj1).toEqual({foo: jasmine.stringMatching(/^bar$/)});
+
+    // doesn't work due to typescript restrictions
+    // expect({foo: 'foobarbaz'}).toEqual({foo: jasmine.stringMatching('bar')});
+    let obj2: any = { foo: 'foobarbaz' };
+    expect(obj2.foo).toEqual(jasmine.stringMatching('bar'));
+    expect(obj2).toEqual({foo: jasmine.stringMatching('bar')});
+  });
+
+  describe('when used with a spy', function() {
+    it('is useful for comparing arguments', function() {
+      var callback = jasmine.createSpy('callback');
+
+      callback('foobarbaz');
+
+      expect(callback).toHaveBeenCalledWith(jasmine.stringMatching('bar'));
+      expect(callback).not.toHaveBeenCalledWith(jasmine.stringMatching(/^bar$/));
+    });
+  });
+});
