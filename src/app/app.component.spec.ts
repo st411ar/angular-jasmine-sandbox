@@ -641,4 +641,14 @@ describe('A spy', function() {
     expect(mostRecentCallContext.returnValue).toBeUndefined;
   });
 
+  it('has a shortcut to the first call', function() {
+    foo.setBar(123);
+    foo.setBar(456, 'baz');
+
+    let firstCallContext: any = foo.setBar.calls.first();
+
+    expect(firstCallContext.object).toEqual(foo);
+    expect(firstCallContext.args).toEqual([123]);
+    expect(firstCallContext.returnValue).toBeUndefined;
+  });
 });
