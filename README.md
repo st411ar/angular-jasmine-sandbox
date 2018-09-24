@@ -1,5 +1,7 @@
 # Angular Jasmine Sandbox
 
+Code samples from the [jasmine introduction](https://jasmine.github.io/2.4/introduction.html) manual.
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.2.2.
 
 ## Development server
