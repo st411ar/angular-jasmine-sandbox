@@ -695,4 +695,8 @@ describe('A spy, when created manually', function() {
   it('tracks that the spy was called', function() {
     expect(whatAmI).toHaveBeenCalled();
   });
+
+  it('tracks its number of calls', function() {
+    expect(whatAmI.calls.count()).toEqual(1);
+  })
 });
