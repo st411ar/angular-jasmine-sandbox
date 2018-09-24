@@ -618,4 +618,15 @@ describe('A spy', function() {
 
     expect(foo.setBar.calls.allArgs()).toEqual([[123], [456, 'baz']]);
   });
+
+  it('can provide the context and arguments to all calls', function() {
+    foo.setBar(123);
+    let context: any[] = foo.setBar.calls.all();
+    let firstCallContext: any = context[0];
+
+    expect(firstCallContext.object).toEqual(foo);
+    expect(firstCallContext.args).toEqual([123]);
+    expect(firstCallContext.returnValue).toBeUndefined;
+  });
+
 });
