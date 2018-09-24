@@ -573,3 +573,49 @@ describe('A spy', function() {
     expect(bar).toBe(null);
   });
 });
+
+describe('A spy', function() {
+  var foo, bar = null;
+
+  beforeEach(function() {
+    foo = {
+      setBar: function(value) {
+        bar = value;
+      }
+    };
+
+    spyOn(foo, 'setBar');
+  });
+
+  it('tracks if it was called at all', function() {
+    expect(foo.setBar.calls.any()).toEqual(false);
+
+    foo.setBar();
+
+    expect(foo.setBar.calls.any()).toEqual(true);
+  });
+
+  it('tracks the number of times it was called', function() {
+    expect(foo.setBar.calls.count()).toEqual(0);
+
+    foo.setBar();
+    foo.setBar();
+
+    expect(foo.setBar.calls.count()).toEqual(2);
+  });
+
+  it('tracks the arguments of each call', function() {
+    foo.setBar(123);
+    foo.setBar(456, 'baz');
+
+    expect(foo.setBar.calls.argsFor(0)).toEqual([123]);
+    expect(foo.setBar.calls.argsFor(1)).toEqual([456, 'baz']);
+  });
+
+  it('tracks the arguments of all calls', function() {
+    foo.setBar(123);
+    foo.setBar(456, 'baz');
+
+    expect(foo.setBar.calls.allArgs()).toEqual([[123], [456, 'baz']]);
+  });
+});
