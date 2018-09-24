@@ -621,12 +621,24 @@ describe('A spy', function() {
 
   it('can provide the context and arguments to all calls', function() {
     foo.setBar(123);
+
     let context: any[] = foo.setBar.calls.all();
     let firstCallContext: any = context[0];
 
     expect(firstCallContext.object).toEqual(foo);
     expect(firstCallContext.args).toEqual([123]);
     expect(firstCallContext.returnValue).toBeUndefined;
+  });
+
+  it('has a shortcut to the most recent call', function() {
+    foo.setBar(123);
+    foo.setBar(456, 'baz');
+
+    let mostRecentCallContext: any = foo.setBar.calls.mostRecent();
+
+    expect(mostRecentCallContext.object).toEqual(foo);
+    expect(mostRecentCallContext.args).toEqual([456, 'baz']);
+    expect(mostRecentCallContext.returnValue).toBeUndefined;
   });
 
 });
