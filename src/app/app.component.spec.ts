@@ -667,4 +667,15 @@ describe('A spy', function() {
     expect(spy.calls.first().object).toBe(baz);
     expect(spy.calls.mostRecent().object).toBe(quux);
   });
+
+  it('can be reset', function() {
+    foo.setBar(123);
+    foo.setBar(456, 'baz');
+
+    expect(foo.setBar.calls.any()).toBe(true);
+
+    foo.setBar.calls.reset();
+
+    expect(foo.setBar.calls.any()).toBe(false);
+  });
 });
