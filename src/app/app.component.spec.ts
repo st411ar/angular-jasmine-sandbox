@@ -1063,3 +1063,52 @@ describe('Details of the method "done" for async', function() {
     console.log(buildElapsedTimeMessage(start) + 'afterAll stop');
   });
 });
+
+describe('Parameters details for the long async', function() {
+  let start: number = new Date().getTime();
+
+  beforeAll(function() {
+    console.log(buildElapsedTimeMessage(start) + 'beforeAll start');
+    console.log(buildElapsedTimeMessage(start) + 'beforeAll stop');
+  });
+
+  beforeEach(function(done) {
+    console.log(buildElapsedTimeMessage(start) + 'beforeEach start');
+    setTimeout(function() {
+      console.log(buildElapsedTimeMessage(start) + 'beforeEach async start');
+      done();
+      console.log(buildElapsedTimeMessage(start) + 'beforeEach async stop');
+    }, 1000);
+    console.log(buildElapsedTimeMessage(start) + 'beforeEach stop');
+  }, 1001);
+
+  it('spec 1', function(done) {
+    console.log(buildElapsedTimeMessage(start) + 'spec 1 start');
+    setTimeout(function() {
+      console.log(buildElapsedTimeMessage(start) + 'spec 1 async start');
+      done();
+      console.log(buildElapsedTimeMessage(start) + 'spec 1 async stop');
+    }, 7000);
+    console.log(buildElapsedTimeMessage(start) + 'spec 1 stop');
+  }, 7001);
+
+  it('spec 2', function() {
+    console.log(buildElapsedTimeMessage(start) + 'spec 2 start');
+    console.log(buildElapsedTimeMessage(start) + 'spec 2 stop');
+  });
+
+  it('spec 3', function() {
+    console.log(buildElapsedTimeMessage(start) + 'spec 3 start');
+    console.log(buildElapsedTimeMessage(start) + 'spec 3 stop');
+  });
+
+  afterEach(function() {
+    console.log(buildElapsedTimeMessage(start) + 'afterEach start');
+    console.log(buildElapsedTimeMessage(start) + 'afterEach stop');
+  })
+
+  afterAll(function() {
+    console.log(buildElapsedTimeMessage(start) + 'afterAll start');
+    console.log(buildElapsedTimeMessage(start) + 'afterAll stop');
+  });
+});
